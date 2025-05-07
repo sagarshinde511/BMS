@@ -12,15 +12,16 @@ cursor = conn.cursor()
 
 st.title("Update LightTime Table (ID = 1)")
 
-# Fetch current values
+# Fetch current values from the database
 cursor.execute("SELECT StartTimeH, EndTimeH, StartTimeL, StratTimeL FROM LightTime WHERE id = 1")
 row = cursor.fetchone()
 
 if row:
+    # Use text inputs (no time pickers)
     start_time_h = st.text_input("Start Time H", value=row[0])
     end_time_h = st.text_input("End Time H", value=row[1])
     start_time_l = st.text_input("Start Time L", value=row[2])
-    strat_time_l = st.text_input("Strat Time L", value=row[3])  # Confirm if this is intentionally different
+    strat_time_l = st.text_input("Strat Time L", value=row[3])  # Confirm spelling is intentional
 
     if st.button("Update"):
         update_query = """
